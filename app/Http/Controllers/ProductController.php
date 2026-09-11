@@ -64,6 +64,33 @@ class ProductController extends Controller
                          ->with('success', 'Produit ajouté et mouvement enregistré avec succès !');
     }
 
+    // Afficher le formulaire de modification du produit
+    public function edit(Product $product)
+    {
+        $categories = Category::all();
+        return view('products.edit', compact('product', 'categories'));
+    }
+
+    // Mettre à jour le produit en base de données
+    public function update(Request $request, Product $product)
+    {
+        // 1. Validation des données (la référence doit ignorer le produit actuel)
+        $validated = $request->validate([
+            'reference'   => 'required|unique:products,reference,' . $product->id,
+            'name'        => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'price'       => 'required|numeric|min:0',
+            'quantity'    => 'required|integer|min:0',
+            'alert_stock' => 'required|integer|min:0',
+        ]);
+
+        // 2. Mise à jour des informations
+        $product->update($validated);
+
+        return redirect()->route('products.index')
+                         ->with('success', 'Produit mis à jour avec succès !');
+    }
+
     // Supprimer un produit + mouvement de stock
     public function destroy(Product $product)
     {
