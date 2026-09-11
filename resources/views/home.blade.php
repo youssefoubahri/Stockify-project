@@ -91,7 +91,7 @@
                     <tr>
                         <td class="ps-4 font-monospace fw-semibold text-secondary">{{ $product->reference }}</td>
                         <td class="fw-bold text-dark">{{ $product->name }}</td>
-                        <td>{{ number_format($product->price, 2) }} DH</td>
+                        <td>{{ number_format($product->price, 2) }} €</td>
                         <td>
                             @if($product->quantity <= $product->alert_stock)
                                 <span class="badge badge-soft-danger qty-badge px-3 py-2 rounded-pill">{{ $product->quantity }} (Alerte)</span>
