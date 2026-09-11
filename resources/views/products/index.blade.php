@@ -14,7 +14,7 @@
     </a>
 </div>
 
-<!-- Message de succès après action (Vert) -->
+<!-- Message de succès après action -->
 @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4" role="alert">
         <i class="bi bi-check-circle-fill me-2"></i> {{ session('success') }}
@@ -39,7 +39,7 @@
                 </thead>
                 <tbody>
                     @forelse($products as $product)
-                    <tr>
+                    <tr class="table-row-fade" style="animation-delay: {{ $loop->index * 0.08 }}s;">
                         <td class="ps-4 font-monospace fw-semibold text-secondary">{{ $product->reference }}</td>
                         <td class="fw-bold text-dark">{{ $product->name }}</td>
                         <td>
@@ -50,11 +50,11 @@
                         <td>{{ number_format($product->price, 2) }} €</td>
                         <td>
                             @if($product->quantity <= $product->alert_stock)
-                                <span class="badge badge-soft-danger px-3 py-2 rounded-pill">
+                                <span class="badge badge-soft-danger px-3 py-2 rounded-pill qty-badge">
                                     <i class="bi bi-exclamation-triangle-fill me-1"></i>{{ $product->quantity }}
                                 </span>
                             @else
-                                <span class="badge badge-soft-success px-3 py-2 rounded-pill">
+                                <span class="badge badge-soft-success px-3 py-2 rounded-pill qty-badge">
                                     <i class="bi bi-check-circle-fill me-1"></i>{{ $product->quantity }}
                                 </span>
                             @endif

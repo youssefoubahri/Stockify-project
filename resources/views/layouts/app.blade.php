@@ -78,12 +78,14 @@
             margin: 0.25rem 0.4rem;
             text-decoration: none;
             transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+            position: relative;
         }
 
         .sidebar .nav-link i {
             min-width: 60px;
             text-align: center;
             font-size: 1.3rem;
+            transition: transform 0.2s ease, color 0.2s ease;
         }
 
         .sidebar .nav-link span {
@@ -102,6 +104,11 @@
             transform: translateX(2px);
         }
 
+        .sidebar .nav-link:hover i {
+            transform: scale(1.15) rotate(-3deg);
+            color: #38bdf8;
+        }
+
         /* Lien actif */
         .sidebar .nav-link.active {
             color: #ffffff;
@@ -115,6 +122,19 @@
 
         .sidebar .nav-link.active i {
             color: #38bdf8;
+        }
+
+        .sidebar .nav-link.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 60%;
+            width: 4px;
+            background-color: #38bdf8;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
         }
 
         /* Zone de contenu principal */
@@ -243,29 +263,36 @@
                 transform: scale(1);
             }
         }
-        .sidebar .nav-link {
-            position: relative;
+
+        /* Boutons du header & actions principales */
+        .btn-primary {
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
 
-        .sidebar .nav-link.active::before {
-            content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        height: 60%;
-        width: 4px;
-        background-color: #38bdf8;
-        border-radius: 0 4px 4px 0;
-        box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
-        }
-        .sidebar .nav-link i {
-            transition: transform 0.2s ease, color 0.2s ease;
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(59, 130, 246, 0.35);
         }
 
-        .sidebar .nav-link:hover i {
-            transform: scale(1.15) rotate(-3deg);
-            color: #38bdf8;
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Animation d'apparition progressive des lignes du tableau */
+        .table-row-fade {
+            opacity: 0;
+            animation: rowFadeIn 0.5s ease forwards;
+        }
+
+        @keyframes rowFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
